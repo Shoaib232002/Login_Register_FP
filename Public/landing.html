@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Landing Page | MyApp</title>
+  <link rel="stylesheet" href="/styles/landing.css" />
+</head>
+<body>
+  <nav>
+    <div class="logo">🌐 MyApp</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#" id="logout">Logout</a></li>
+      <li class="profile">
+        <span id="profileToggle">👤</span>
+        <div class="dropdown" id="profileDropdown">
+          <p><strong>Username:</strong> <span id="username"></span></p>
+          <p><strong>Email:</strong> <span id="email"></span></p>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Welcome to the Landing Page</h1>
+    <p>This is a protected route. You're logged in!</p>
+  </main>
+
+  <script>
+    async function loadProfile() {
+      const res = await fetch('/api/profile');
+      const data = await res.json();
+
+      if (!data.success) {
+        window.location.href = "/login.html";
+      } else {
+        document.getElementById('username').innerText = data.user.username;
+        document.getElementById('email').innerText = data.user.email;
+      }
+    }
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await fetch('/api/logout');
+      window.location.href = "/login.html";
+    });
+
+    document.getElementById('profileToggle').addEventListener('click', () => {
+      document.getElementById('profileDropdown').classList.toggle('show');
+    });
+
+    loadProfile();
+  </script>
+</body>
+</html>

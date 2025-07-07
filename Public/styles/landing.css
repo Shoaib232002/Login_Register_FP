@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f8f9fa;
+}
+
+nav {
+  background-color: #343a40;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.nav-links li a,
+#profileToggle {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: white;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  display: none;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+.dropdown.show {
+  display: block;
+}
+
+main {
+  padding: 2rem;
+  text-align: center;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | MyApp</title>
+  <link rel="stylesheet" href="/styles/register.css"/>
+</head>
+<body>
+  <div class="container">
+    <form id="registerForm">
+      <h2>Create Account</h2>
+      <input type="text" id="username" placeholder="Username" required minlength="3" />
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Register</button>
+      <div class="links">
+        <a href="/login.html">Already have an account? Login</a>
+      </div>
+      <p id="message"></p>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ username, email, password })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        window.location.href = "/login.html";
+      } else {
+        document.getElementById('message').innerText = data.message;
+      }
+    });
+  </script>
+</body>
+</html>
